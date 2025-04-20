@@ -37,7 +37,7 @@ public class TaskController {
     ResponseEntity<List<Task>> all() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        return new ResponseEntity<>(repository.findByuserid(u.getUser().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findByuserId(u.getUser().getId()), HttpStatus.OK);
     }
 
     // @GetMapping("/stat")
@@ -50,7 +50,7 @@ public class TaskController {
         // throw new NotImplementedException("Not implemented!");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-        task.setUserid(u.getUser().getId());
+        task.setUserId(u.getUser().getId());
         return repository.save(task);
    }
 
@@ -63,7 +63,7 @@ public class TaskController {
    Task replaceTask(@RequestBody Task newTask, @PathVariable Long id) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     UserPrincipal u = (UserPrincipal) auth.getPrincipal();
-    Task task =  repository.findByIdAndUserid(id, u.getUser().getId());
+    Task task =  repository.findByIdAndUserId(id, u.getUser().getId());
     if (task == null) {
         
     }

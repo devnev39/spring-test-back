@@ -6,5 +6,5 @@ create table user (
 );
 
 alter table task
-add column userid int,
-add constraint fk_user_id foreign key (userid) references user(id);
+add column user_id int,
+add constraint fk_user_id foreign key (user_id) references user(id);

@@ -22,7 +22,8 @@ public class Task {
    private String name;
    private String description;
    private Boolean completed;
-   private Long userid;
+
+   private Long userId;
 
    @Column(columnDefinition="timestamp default (sysdate())")
    private final Timestamp createdAt = new Timestamp(System.currentTimeMillis());
