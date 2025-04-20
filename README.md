@@ -15,7 +15,7 @@ This is spring-boot backend for spring-test.
 3. Mysql is required for backend setup. Create a database with name dac OR setup the name in application.properties.
 4. Run the backend migrations with 
 ```bash
-    mvn flyway:migrate.
+    mvn flyway:migrate
 ```
 5. Run the backend with 
 ```bash
