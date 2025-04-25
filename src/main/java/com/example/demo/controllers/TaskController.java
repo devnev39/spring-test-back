@@ -23,6 +23,8 @@ import com.example.demo.models.common.UserPrincipal;
 import com.example.demo.models.entity.Task;
 import com.example.demo.repository.TaskRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
@@ -60,18 +62,19 @@ public class TaskController {
    }
 
    @PatchMapping("/{id}")
-   Task replaceTask(@RequestBody Task newTask, @PathVariable Long id) {
+   Task replaceTask(@RequestBody Task newTask, @PathVariable Long id, HttpServletRequest request) {
     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     UserPrincipal u = (UserPrincipal) auth.getPrincipal();
     Task task =  repository.findByIdAndUserId(id, u.getUser().getId());
     if (task == null) {
-        
+        throw new TaskNotFoundException(id);
+    } else {
+        if (newTask.getName() != null) task.setName(newTask.getName());
+        if (newTask.getCompleted() != null) task.setCompleted(newTask.getCompleted());
+        if (newTask.getDescription() != null) task.setDescription(newTask.getDescription());
+        task.setUpdatedAtDefault();
+        return repository.save(task);
     }
-    if (newTask.getName() != null) task.setName(newTask.getName());
-    if (newTask.getCompleted() != null) task.setCompleted(newTask.getCompleted());
-    if (newTask.getDescription() != null) task.setDescription(newTask.getDescription());
-    task.setUpdatedAtDefault();
-    return repository.save(task);
    }
 
    @DeleteMapping("/{id}")

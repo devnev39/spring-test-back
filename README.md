@@ -30,3 +30,36 @@ This is spring-boot backend for spring-test.
     npm run dev
 ```
 The backend url can be set from the config.js.
+
+## Info about folder structure
+
+.
+|____out.txt
+|____test
+| |____java
+| | |____com
+| | | |____example
+| | | | |____demo
+| | | | | |____DemoApplicationTests.java
+|____main
+| |____resources
+| | |____static
+| | |____**db**  -  Contains db related files like migrations
+| | | |____migration
+| | |____templates
+| | |____application.properties
+| |____java
+| | |____com
+| | | |____example
+| | | | |____demo
+| | | | | |____**filters**  - Contains filters like middlewares
+| | | | | |____**repository**  - Contains jpa repositories which interfaces with database
+| | | | | |____**security**  -  Contains security configuration and jwt configs
+| | | | | |____**models**  -  Contains all the models required for information transfer
+| | | | | | |____**dto**  -  Contains classes associated with REST API transfer
+| | | | | | |____**entity**  -  Contains classes which are directly translated to database schema
+| | | | | | |____**common** - Contains classes which are used internally in the backend
+| | | | | |____**exceptions** - Contains classes which handle all the exceptions in the backend code
+| | | | | |____**controllers** - All the rest api controllers like express routers
+| | | | | |____**services** - Service configurations like JWT
+| | | | | |____DemoApplication.java
